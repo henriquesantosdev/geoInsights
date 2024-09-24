@@ -40,18 +40,10 @@
     fill-opacity:1;
 }
 
-.map {
-    width: 100%;
-}
-
 .map path {
     fill: #b50d0d;
     stroke: #000;
     stroke-width: 1;
-}
-
-.conquistado {
-    fill: #3ff312;
 }
 
 .map path:hover {
