@@ -1,0 +1,59 @@
+.path-base {
+    font-size:12px;
+    stroke:#000000;
+    stroke-width:1.00;
+    stroke-linecap:butt;
+    stroke-linejoin:bevel;
+    stroke-miterlimit:4;
+    stroke-dasharray:none;
+    stroke-opacity:1;
+    marker-start:none;
+    fill-opacity:1;
+}
+
+.path-base-02 {
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 100%;
+    font-family: 'Arial, sans-serif';
+    writing-mode: lr-tb;
+    fill-opacity: 1;
+    fill-rule: evenodd;
+    stroke: #000000;
+    stroke-width: 1.00;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    stroke-miterlimit: 4;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke-opacity: 1;
+}
+
+.g-base {
+    stroke:#000000;
+    stroke-width:5.36092047;
+    stroke-miterlimit:4;
+    stroke-dasharray:none;
+    stroke-opacity:1;
+    fill-opacity:1;
+}
+
+.map {
+    width: 100%;
+}
+
+.map path {
+    fill: #b50d0d;
+    stroke: #000;
+    stroke-width: 1;
+}
+
+.conquistado {
+    fill: #3ff312;
+}
+
+.map path:hover {
+    fill: #f39c12;
+}
