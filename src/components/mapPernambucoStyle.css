@@ -1,6 +1,10 @@
-.path-base {
+/* :root {
+    --stroke-path: #fff;
+} */
+
+/* .path-base {
     font-size:12px;
-    stroke:#000000;
+    stroke:var(--stroke-path);
     stroke-width:1.00;
     stroke-linecap:butt;
     stroke-linejoin:bevel;
@@ -21,7 +25,7 @@
     writing-mode: lr-tb;
     fill-opacity: 1;
     fill-rule: evenodd;
-    stroke: #000000;
+    stroke: var(--stroke-path);
     stroke-width: 1.00;
     stroke-linecap: butt;
     stroke-linejoin: miter;
@@ -32,20 +36,25 @@
 }
 
 .g-base {
-    stroke:#000000;
+    stroke:var(--stroke-path);
     stroke-width:5.36092047;
     stroke-miterlimit:4;
     stroke-dasharray:none;
     stroke-opacity:1;
     fill-opacity:1;
-}
+} */
+
 
 .map path {
-    fill: #b50d0d;
-    stroke: #000;
+    fill: #FEFEE9;
+    stroke: #f7daa5;
     stroke-width: 1;
 }
 
 .map path:hover {
-    fill: #f39c12;
+    fill: #0076D6;
+}
+
+.map path.dominated {
+    fill: #0076D6;
 }

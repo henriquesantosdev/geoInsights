@@ -1,13 +1,19 @@
-import './map.css'
+import './mapPernambucoStyle.css'
+import bandeiraPernambuco from "/Bandeira_pernambuco.png"
 
 export function SimpleMapPernambuco() {
     return (
-    <div className='map'>
+    <div className='map bg-primary-map px-8 pb-8 rounded-xl'>
+
+        <div className=' flex items-center justify-center gap-2 rounded-b-xl mx-auto w-56 text-gray-500 mb-10 bg-white p-2'>
+            <img src={bandeiraPernambuco} alt="Bandeira de pernambuco" className='w-6' />
+            <p className='font-semibold'>Pernambuco</p> 
+        </div>
+
         <svg width="100%" viewBox="0 0 917.57593 320.59138">
         <g transform="translate(-27.850324,-33.519923)">
             
             <path
-                
                 className='path-base'
                 d="m 900.27967,111.80165 3.4559,2.7202 v -3.1453 l -0.576,-0.765 1.5634,0.68 1.3988,-0.425 2.057,1.0201 1.9748,10.1157 4.361,1.0201 v 0.085 l 6.418,1.7001 5.43069,-1.1051 1.3165,-0.255 1.0697,-0.6801 1.8102,0.1701 1.1519,-0.2551 0.576,0.17 1.6456,0.3401 0.576,0.425 1.9748,-0.085 0.1646,0.595 0.4937,0.17 -0.2469,1.1051 0.2469,0.6801 -1.152,0.17 -2.0571,0.595 -0.9873,-0.34 -0.8229,0.9351 0.1646,0.765 -0.3291,0.7651 -1.3988,0.935 -0.4937,-0.255 -0.4937,-0.935 -1.0697,0.34 -2.2216,-0.6801 -1.3988,-0.765 h -1.152 l -0.576,-0.5951 -3.45579,0.6801 -4.7724,-0.5101 -0.576,0.3401 -0.082,0.935 -0.9051,0.17 -2.0571,-2.3801 -2.2216,-0.9351 -0.3291,-0.51 v -0.1701 l -0.2469,-0.17 -0.9874,0.17 -3.5381,-2.2951 -1.8925,-3.7403 -1.5634,-1.0201 -2.3862,-8.1605 2.1394,2.3801" id="mun_2600054">
                 <title>Abreu e Lima</title>

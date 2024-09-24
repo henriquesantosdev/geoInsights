@@ -5,12 +5,18 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
-    colors: {
-      'dark-marques': '#33333F',
-      'primary-color': '#0076D6',
-      'secondary-color': '#61AAE6'
-    }
+    extend: {
+      fontFamily: {
+        sans: 'Inter'
+      },
+      colors: {
+        'bgmarques': '#E7E7E7',
+        'primary-color': '#0076D6',
+        'secondary-color': '#61AAE6',
+        'primary-map': '#F6E1B9',
+        'secondary-map': '#FEFEE9'
+      }
+    },
   },
   plugins: [],
 }
