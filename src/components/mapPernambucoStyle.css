@@ -1,53 +1,6 @@
-/* :root {
-    --stroke-path: #fff;
-} */
-
-/* .path-base {
-    font-size:12px;
-    stroke:var(--stroke-path);
-    stroke-width:1.00;
-    stroke-linecap:butt;
-    stroke-linejoin:bevel;
-    stroke-miterlimit:4;
-    stroke-dasharray:none;
-    stroke-opacity:1;
-    marker-start:none;
-    fill-opacity:1;
-}
-
-.path-base-02 {
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 100%;
-    font-family: 'Arial, sans-serif';
-    writing-mode: lr-tb;
-    fill-opacity: 1;
-    fill-rule: evenodd;
-    stroke: var(--stroke-path);
-    stroke-width: 1.00;
-    stroke-linecap: butt;
-    stroke-linejoin: miter;
-    stroke-miterlimit: 4;
-    stroke-dasharray: none;
-    stroke-dashoffset: 0;
-    stroke-opacity: 1;
-}
-
-.g-base {
-    stroke:var(--stroke-path);
-    stroke-width:5.36092047;
-    stroke-miterlimit:4;
-    stroke-dasharray:none;
-    stroke-opacity:1;
-    fill-opacity:1;
-} */
-
-
 .map path {
     fill: #FEFEE9;
-    stroke: #f7daa5;
+    stroke: #ffc768;
     stroke-width: 1;
 }
 
@@ -57,4 +10,11 @@
 
 .map path.dominated {
     fill: #0076D6;
+}
+
+.map {
+    background-color: #F6E1B9;
+    opacity: 1;
+    background-image:  linear-gradient(#ffc768 1.9000000000000001px, transparent 1.9000000000000001px), linear-gradient(to right, #ffc768 1.9000000000000001px, #F6E1B9 1.9000000000000001px);
+    background-size: 38px 38px;
 }

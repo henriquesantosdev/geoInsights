@@ -14,7 +14,11 @@ export default {
         'primary-color': '#0076D6',
         'secondary-color': '#61AAE6',
         'primary-map': '#F6E1B9',
-        'secondary-map': '#FEFEE9'
+        'secondary-map': '#FEFEE9',
+        'pattern-map': ''
+      },
+      backgroundImage: {
+        'map': "url('/bg-pattern-map.png')",
       }
     },
   },

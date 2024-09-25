@@ -7,7 +7,7 @@ export function SimpleMapPernambuco() {
 
         <div className=' flex items-center justify-center gap-2 rounded-b-xl mx-auto w-56 text-gray-500 mb-10 bg-white p-2'>
             <img src={bandeiraPernambuco} alt="Bandeira de pernambuco" className='w-6' />
-            <p className='font-semibold'>Pernambuco</p> 
+            <p className='font-semibold'>Pernambuco</p>
         </div>
 
         <svg width="100%" viewBox="0 0 917.57593 320.59138">
