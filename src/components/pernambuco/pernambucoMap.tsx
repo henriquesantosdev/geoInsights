@@ -1,10 +1,9 @@
-import './mapPernambucoStyle.css'
+import './pernambucoMapStyle.css'
 import bandeiraPernambuco from "/Bandeira_pernambuco.png"
 
-export function SimpleMapPernambuco() {
+export function PernambucoMap() {
     return (
     <div className='map bg-primary-map px-8 pb-8 rounded-xl'>
-
         <div className=' flex items-center justify-center gap-2 rounded-b-xl mx-auto w-56 text-gray-500 mb-10 bg-white p-2'>
             <img src={bandeiraPernambuco} alt="Bandeira de pernambuco" className='w-6' />
             <p className='font-semibold'>Pernambuco</p>
@@ -1495,6 +1494,19 @@ export function SimpleMapPernambuco() {
             </path>
         </g>
         </svg>
+
+        <div className='flex items-center justify-center gap-8 mt-8'>
+            <div className='flex items-center gap-2'>
+                <div className='rounded bg-primary-color w-4 h-4'></div>
+                <span className='text-gray-600 font-semibold'>Municípios adquiridos</span>
+            </div>
+
+            <div className='flex items-center gap-2'>
+                <div className='rounded bg-secondary-map w-4 h-4' ></div>
+                <span className='text-gray-600 font-semibold'>Municípios não adquiridos</span>
+            </div>
+        </div>
+
     </div>
     )
 }

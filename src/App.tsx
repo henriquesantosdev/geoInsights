@@ -1,27 +1,26 @@
-import { SimpleMapPernambuco } from "./components/simpleMapPernambuco"
-import { HeaderMap } from './components/headerGeoInsights'
-import marquesConsultLogo from '/logo_marques_consult.webp'
-import { ArrowRightLeft, Linkedin, MapPinMinus, MapPinPlus } from "lucide-react"
+import { PernambucoMap } from "./components/pernambuco/pernambucoMap"
+import { HeaderGeoInsights } from './components/headerGeoInsights'
+import { ArrowRightLeft, MapPinMinus, MapPinPlus } from "lucide-react"
+import { FooterGeoInsights } from "./components/footerGeoInsights"
 
 export default function App() {
 
   return (
     <main>
-      <HeaderMap/>
-
+      <HeaderGeoInsights/>
       <div className='border-b-2 border-b-secondary-color mb-8'></div>
 
       <div className='w-10/12 mx-auto'>
-        <SimpleMapPernambuco/>
+        <PernambucoMap/>
 
         <div className="mt-8 flex items-center gap-4 text-primary-color">
           <div className="flex flex-col p-4 gap-4 w-6/12 border bg-white border-gray-300 text-gray-500 rounded-xl">
 
             <h2 className="font-semibold text-lg text-gray-600">Municípios não adquiridos</h2>
 
-            <input type="text" className="border rounded p-4" placeholder="Qual estado procura?" />
+            <input type="text" className="border rounded p-4 focus:outline-none focus:ring focus:ring-primary-color" placeholder="Qual estado procura?" />
 
-            <select className="h-44" name="" id="" multiple>
+            <select className="h-44 focus:outline-none" name="" id="" multiple>
               <option value="0">Município 00</option>
               <option value="1">Município 01</option>
               <option value="2">Município 02</option>
@@ -29,9 +28,12 @@ export default function App() {
               <option value="4">Município 04</option>
               <option value="5">Município 05</option>
               <option value="6">Município 06</option>
+              <option value="7">Município 07</option>
+              <option value="8">Município 08</option>
+              <option value="9">Município 09</option>
             </select>
 
-            <button className="flex items-center gap-2 rounded-md justify-center bg-primary-color text-white font-semibold h-14">
+            <button className="flex items-center gap-2 rounded-md justify-center bg-primary-color hover:bg-secondary-color text-white font-semibold h-14">
               <MapPinPlus />
               Registrar municipio
             </button>
@@ -45,9 +47,9 @@ export default function App() {
           <div className="flex flex-col p-4 gap-4 w-6/12 border bg-white border-gray-300 text-gray-500 rounded-xl">
             <h2 className="font-semibold text-lg text-gray-600">Municípios adquiridos</h2>
 
-            <input type="text" className="border rounded p-4" placeholder="Qual estado procura?" />
+            <input type="text" className="border rounded p-4 focus:outline-none focus:ring focus:ring-primary-color" placeholder="Qual estado procura?" />
 
-            <select className="h-44" name="" id="" multiple>
+            <select className="h-44 focus:outline-none" name="" id="" multiple>
               <option value="0">Município 00</option>
               <option value="1">Município 01</option>
               <option value="2">Município 02</option>
@@ -55,9 +57,12 @@ export default function App() {
               <option value="4">Município 04</option>
               <option value="5">Município 05</option>
               <option value="6">Município 06</option>
+              <option value="7">Município 07</option>
+              <option value="8">Município 08</option>
+              <option value="9">Município 09</option>
             </select>
 
-            <button className="flex items-center gap-2 rounded-md justify-center bg-primary-color text-white font-semibold h-14">
+            <button className="flex items-center gap-2 rounded-md justify-center bg-primary-color hover:bg-secondary-color text-white font-semibold h-14">
               <MapPinMinus />
               Remover municipio
             </button>
@@ -66,22 +71,8 @@ export default function App() {
         </div>
       </div>
 
-      <div className='border-t-2 border-t-secondary-color mt-8'></div>
-
-      <footer className="flex p-4 items-center justify-between w-10/12 mx-auto">
-        <div>
-          <img src={marquesConsultLogo} alt="Logo marques consult" className='w-[200px]' />
-        </div>
-        <div>
-          <p className="text-primary-color text-center">
-            Created with ❤️ by <br />
-
-            <a href="https://www.linkedin.com/in/henrique-santos-497b0026a/" target="_blank" className="px-4 py-1 text-white rounded bg-primary-color hover:bg-secondary-color flex items-center gap-1" >
-              <Linkedin className="size-4" /> Henriquesantosdev
-            </a>
-          </p>
-        </div>
-      </footer>
+      <div className='border-t-2 border-t-primary-color mt-8'></div>
+      <FooterGeoInsights/>
     </main>
   )
 }
