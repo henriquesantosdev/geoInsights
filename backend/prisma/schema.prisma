@@ -11,7 +11,7 @@ model municipality {
   id         String   @id @default(uuid())
   state      String
   name       String
-  presente   Boolean  @default(false)
+  present   Boolean  @default(false)
   created_at DateTime
 
   @@map("state")
