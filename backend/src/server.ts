@@ -1,6 +1,7 @@
 import fastify from "fastify"
 import cors from "@fastify/cors"
-import { prisma } from "./lib/prisma"
+import { getAbsentMunicipalities } from "./routes/get-absent-municipalities"
+import { getPresentMunicipalities } from "./routes/get-present-municipalities"
 
 const app = fastify()
 
@@ -8,11 +9,10 @@ app.register(cors, {
     origin: true
 })
 
-// app.get('/municipalities', (request, reply) => {
-//     prisma.
-// })
+app.register(getAbsentMunicipalities)
+app.register(getPresentMunicipalities)
 
-app.listen({ port: 3333, host: '0.0.0.0' }).then((address) => {
+app.listen({ port: 3333 }).then((address) => {
     console.log(`🚀 Server is running on: \x1b[32m${address}`)
 }).catch(err => {
     console.error(`❌ Failed to start server: ${err.message}`)
