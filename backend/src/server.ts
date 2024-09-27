@@ -26,6 +26,8 @@ app.register(getMunicipality)
 app.register(updateMunicipality)
 app.register(deleteMunicipality)
 
+// app.register()
+
 app.listen({ port: 3333 }).then((address) => {
     console.log(`🚀 Server is running on: \x1b[32m${address}/api`)
 }).catch(err => {
