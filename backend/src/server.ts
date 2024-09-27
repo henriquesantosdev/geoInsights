@@ -1,7 +1,9 @@
 import fastify from "fastify"
 import cors from "@fastify/cors"
-import { getAbsentMunicipalities } from "./routes/get-absent-municipalities"
 import { getPresentMunicipalities } from "./routes/get-present-municipalities"
+import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod"
+import { checkServer } from "./routes/check-server"
+import { basePernambuco } from "./routes/bases/base-pernambuco"
 
 const app = fastify()
 
@@ -9,7 +11,11 @@ app.register(cors, {
     origin: true
 })
 
-app.register(getAbsentMunicipalities)
+app.setSerializerCompiler(serializerCompiler)
+app.setValidatorCompiler(validatorCompiler)
+
+app.register(checkServer)
+app.register(basePernambuco)
 app.register(getPresentMunicipalities)
 
 app.listen({ port: 3333 }).then((address) => {

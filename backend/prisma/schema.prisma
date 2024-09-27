@@ -7,12 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model municipality {
-  id         String   @id @default(uuid())
-  state      String
-  name       String
-  present   Boolean  @default(false)
-  created_at DateTime
+model State {
+  id             String         @id @default(uuid())
+  name           String
+  municipalities Municipality[]
+}
 
-  @@map("state")
+model Municipality {
+  id      String  @id @default(uuid())
+  stateId String
+  name    String
+  present Boolean @default(false)
+  state  State   @relation(fields: [stateId], references: [id])
 }

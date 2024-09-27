@@ -3,15 +3,15 @@ import { ZodTypeProvider } from "fastify-type-provider-zod"
 import { z } from 'zod'
 
 export const getPresentMunicipalities = async (app: FastifyInstance) => {
-    app.withTypeProvider<ZodTypeProvider>().get('/api/present/municipalities/:state', {
+    app.withTypeProvider<ZodTypeProvider>().delete('/api/present/municipalities', {
         schema: {
-            params: z.object({
+            body: z.object({
                 state: z.string()
             })
         }
     }, async (request, reply) => {
 
-        const { state } = request.params
+        const { state } = request.body
 
         return `getting present municipalities!: ${state}`
 
