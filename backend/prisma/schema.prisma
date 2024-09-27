@@ -18,5 +18,5 @@ model Municipality {
   stateId String
   name    String
   present Boolean @default(false)
-  state  State   @relation(fields: [stateId], references: [id])
+  state   State   @relation(fields: [stateId], references: [id])
 }
