@@ -1,16 +1,16 @@
 import type { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod"
 import { z } from 'zod'
-import { prisma } from "../lib/prisma";
+import { prisma } from "../../lib/prisma";
 
-export const getPresentMunicipalities = async (app: FastifyInstance) => {
-    app.withTypeProvider<ZodTypeProvider>().get('/api/present/municipalities/:state', {
+export const getAbsentMunicipalities = async (app: FastifyInstance) => {
+    app.withTypeProvider<ZodTypeProvider>().get('/api/absent/municipalities/:state', {
         schema: {
             params: z.object({
                 state: z.string()
             })
         }
-    }, async (request, reply) => {
+    }, async (request) => {
 
         const { state } = request.params
 
@@ -21,7 +21,7 @@ export const getPresentMunicipalities = async (app: FastifyInstance) => {
             include: {
                 municipalities: {
                     where: {
-                        present: true
+                        present: false
                     }
                 }
             }

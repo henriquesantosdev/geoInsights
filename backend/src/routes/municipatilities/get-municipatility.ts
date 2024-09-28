@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod"
 import { z } from 'zod'
-import { prisma } from "../lib/prisma";
+import { prisma } from "../../lib/prisma";
 
 export const getMunicipality = async (app: FastifyInstance) => {
     app.withTypeProvider<ZodTypeProvider>().get('/api/municipatility/:municipalityId', {
@@ -25,8 +25,8 @@ export const getMunicipality = async (app: FastifyInstance) => {
                 message: 'Municipality not found!',
             }
         }
-        
+
         return municipalityFound
-        }
+    }
     )
 }

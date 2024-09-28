@@ -1,13 +1,13 @@
 import fastify from "fastify"
 import cors from "@fastify/cors"
-import { getPresentMunicipalities } from "./routes/get-present-municipalities"
+import { getPresentMunicipalities } from "./routes/municipatilities/get-present-municipalities"
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod"
 import { checkServer } from "./routes/check-server"
 import { basePernambuco } from "./routes/bases/base-pernambuco"
-import { getAbsentMunicipalities } from "./routes/get-absent-municipalities"
-import { getMunicipality } from "./routes/get-municipatility"
-import { updateMunicipality } from "./routes/update-municipality"
-import { deleteMunicipality } from "./routes/delete-municipality"
+import { getAbsentMunicipalities } from "./routes/municipatilities/get-absent-municipalities"
+import { getMunicipality } from "./routes/municipatilities/get-municipatility"
+import { updateMunicipality } from "./routes/municipatilities/update-municipality"
+import { deleteMunicipality } from "./routes/municipatilities/delete-municipality"
 
 const app = fastify()
 

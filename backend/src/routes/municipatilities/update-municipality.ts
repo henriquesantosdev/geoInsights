@@ -1,10 +1,10 @@
 import type { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod"
 import { z } from 'zod'
-import { prisma } from "../lib/prisma";
+import { prisma } from "../../lib/prisma";
 
 export const updateMunicipality = async (app: FastifyInstance) => {
-    app.withTypeProvider<ZodTypeProvider>().put('/api/:municipalityId', {
+    app.withTypeProvider<ZodTypeProvider>().put('/api/municipatility/:municipalityId', {
         schema: {
             params: z.object({
                 municipalityId: z.string().uuid()

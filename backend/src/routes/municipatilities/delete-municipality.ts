@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod"
 import { z } from 'zod'
-import { prisma } from "../lib/prisma";
+import { prisma } from "../../lib/prisma";
 
 export const deleteMunicipality = async (app: FastifyInstance) => {
     app.withTypeProvider<ZodTypeProvider>().delete('/api/municipatility/:municipalityId', {
@@ -25,7 +25,7 @@ export const deleteMunicipality = async (app: FastifyInstance) => {
                 "message": "Municipatility was not deleted!"
             }
         }
-        
+
         return {
             "message": "Municipatility was deleted!"
         }
