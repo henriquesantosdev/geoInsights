@@ -6,9 +6,10 @@
 
 .map path:hover {
     fill: #0076D6;
+    cursor: pointer;
 }
 
-.map path.dominated {
+.map path.acquired {
     fill: #0076D6;
 }
 
