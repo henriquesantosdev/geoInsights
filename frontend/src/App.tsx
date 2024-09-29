@@ -10,7 +10,7 @@ export default function App() {
   interface MunicipalityInterface {
     id: string;
     name: string;
-    isAcquired: boolean;
+    present: boolean;
     stateId: string;
   }
 
@@ -53,8 +53,6 @@ export default function App() {
 
     const municipalitiesToRegister = data.getAll('municipalityToRegister') as string[];
 
-    console.log("Selected municipalities for registration:", municipalitiesToRegister);
-
     try {
       await Promise.all(municipalitiesToRegister.map(async (municipalityId) => {
         await axiosInstace.put(`/api/municipatility/${municipalityId}`, {
@@ -87,36 +85,27 @@ export default function App() {
     const data = new FormData(event.currentTarget);
     const municipalitiesToRemove = data.getAll('municipalityToRemove') as string[];
 
-    console.log("Selected municipalities for removal:", municipalitiesToRemove);
-
     try {
-      // Remove acquired municipalities in the API
       await Promise.all(municipalitiesToRemove.map((municipalityId) =>
         axiosInstace.put(`/api/municipatility/${municipalityId}`, { present: false })
       ));
 
-      // Fetch the details of the removed municipalities
       const removedMunicipalities = await Promise.all(
         municipalitiesToRemove.map(async (municipalityId) => {
           const response = await axiosInstace.get(`/api/municipatility/${municipalityId}`);
-          return response.data; // Supondo que isso retorna o objeto do município
+          return response.data;
         })
       );
 
-      // Atualiza os estados localmente
       setAcquiredMunicipalities((prev) =>
         prev.filter(m => !municipalitiesToRemove.includes(m.id))
       );
 
-      // Aqui você deve adicionar os municípios removidos ao estado, mantendo todas as propriedades
       setNotAcquiredMunicipalities((prev) => [
         ...prev,
         ...removedMunicipalities // Agora estamos adicionando os municípios com todos os detalhes
       ]);
 
-      console.log("Municipalities removed successfully:", removedMunicipalities);
-
-      // Recarregar a página para refletir as mudanças
       window.location.reload();
 
     } catch (error) {
@@ -130,7 +119,7 @@ export default function App() {
       <div className='border-b-2 border-b-secondary-color mb-8'></div>
 
       <div className='w-10/12 mx-auto'>
-        <PernambucoMap />
+        <PernambucoMap acquiredMunicipalities={acquiredMunicipalities} />
 
         <div className="mt-8 flex items-center gap-4 text-primary-color">
           <div className="flex flex-col p-4 gap-4 w-6/12 border bg-white border-gray-300 text-gray-500 rounded-xl">
