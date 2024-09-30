@@ -3,31 +3,30 @@ import { ZodTypeProvider } from "fastify-type-provider-zod"
 import { z } from 'zod'
 import { prisma } from "../../lib/prisma";
 
-export const deleteMunicipality = async (app: FastifyInstance) => {
-    app.withTypeProvider<ZodTypeProvider>().delete('/api/municipatility/:municipalityId', {
+export const getMunicipality = async (app: FastifyInstance) => {
+    app.withTypeProvider<ZodTypeProvider>().get('/api/municipality/:municipalityId', {
         schema: {
             params: z.object({
                 municipalityId: z.string().uuid()
             })
         }
-    }, async (request) => {
+    }, async (request, reply) => {
 
         const { municipalityId } = request.params
 
-        const municipalityDeleted = await prisma.municipality.delete({
+        const municipalityFound = await prisma.municipality.findUnique({
             where: {
                 id: municipalityId
             }
         })
 
-        if (!municipalityDeleted) {
+        if (!municipalityFound) {
             return {
-                "message": "Municipatility was not deleted!"
+                message: 'Municipality not found!',
             }
         }
 
-        return {
-            "message": "Municipatility was deleted!"
-        }
-    })
+        return municipalityFound
+    }
+    )
 }

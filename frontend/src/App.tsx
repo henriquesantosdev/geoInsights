@@ -55,19 +55,19 @@ export default function App() {
 
     try {
       await Promise.all(municipalitiesToRegister.map(async (municipalityId) => {
-        await axiosInstace.put(`/api/municipatility/${municipalityId}`, {
+        await axiosInstace.put(`/api/municipality/${municipalityId}`, {
           present: true
         });
       }));
 
       const newMunicipalities = await Promise.all(
         municipalitiesToRegister.map(async (municipalityId) => {
-          const response = await axiosInstace.get(`/api/municipatility/${municipalityId}`);
+          const response = await axiosInstace.get(`/api/municipality/${municipalityId}`);
           return response.data;
         })
       );
 
-      setAcquiredMunicipalities((prev) => [...prev, ...newMunicipalities]);
+      setAcquiredMunicipalities((prev) => [...newMunicipalities, ...prev]);
 
       setNotAcquiredMunicipalities((prev) =>
         prev.filter((municipality) => !municipalitiesToRegister.includes(municipality.id))
@@ -87,12 +87,12 @@ export default function App() {
 
     try {
       await Promise.all(municipalitiesToRemove.map((municipalityId) =>
-        axiosInstace.put(`/api/municipatility/${municipalityId}`, { present: false })
+        axiosInstace.put(`/api/municipality/${municipalityId}`, { present: false })
       ));
 
       const removedMunicipalities = await Promise.all(
         municipalitiesToRemove.map(async (municipalityId) => {
-          const response = await axiosInstace.get(`/api/municipatility/${municipalityId}`);
+          const response = await axiosInstace.get(`/api/municipality/${municipalityId}`);
           return response.data;
         })
       );
@@ -102,11 +102,9 @@ export default function App() {
       );
 
       setNotAcquiredMunicipalities((prev) => [
-        ...prev,
-        ...removedMunicipalities // Agora estamos adicionando os municípios com todos os detalhes
+        ...removedMunicipalities, // Agora estamos adicionando os municípios com todos os detalhes
+        ...prev
       ]);
-
-      window.location.reload();
 
     } catch (error) {
       console.error("Error removing municipalities:", error);
@@ -119,7 +117,9 @@ export default function App() {
       <div className='border-b-2 border-b-secondary-color mb-8'></div>
 
       <div className='w-10/12 mx-auto'>
-        <PernambucoMap acquiredMunicipalities={acquiredMunicipalities} />
+        <PernambucoMap
+          acquiredMunicipalities={acquiredMunicipalities}
+        />
 
         <div className="mt-8 flex items-center gap-4 text-primary-color">
           <div className="flex flex-col p-4 gap-4 w-6/12 border bg-white border-gray-300 text-gray-500 rounded-xl">
