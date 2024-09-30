@@ -14,19 +14,18 @@ export default function App() {
     stateId: string;
   }
 
-  // Acquired municipalities -----------------------------------------------------
+  // Acquired municipalities ---------------------------------------------------------
   const [acquiredMunicipalities, setAcquiredMunicipalities] = useState<MunicipalityInterface[]>([]);
 
   // Not acquired municipalities -----------------------------------------------------
   const [notAcquiredMunicipalities, setNotAcquiredMunicipalities] = useState<MunicipalityInterface[]>([]);
 
+  // Fetch acquired and not acquired municipalities
   useEffect(() => {
-    // Fetch acquired municipalities
     axiosInstace.get(`/api/present/municipalities/pernambuco`).then(response => {
       setAcquiredMunicipalities(response.data.municipalities);
     });
 
-    // Fetch not acquired municipalities
     axiosInstace.get(`/api/absent/municipalities/pernambuco`).then(response => {
       setNotAcquiredMunicipalities(response.data.municipalities);
     });

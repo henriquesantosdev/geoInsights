@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './pernambucoMapStyle.css';
 import bandeiraPernambuco from '/Bandeira_pernambuco.png';
 import { ModalMunicipalityDetails } from '../modalMunicipalityDetails';
@@ -24,14 +24,6 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
 
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Memoizando a função handlePathClick para evitar recriações desnecessárias
-  const handlePathClick = useCallback((municipalityName: string) => {
-    console.log(`Município clicado: ${municipalityName}`);
-
-
-    handleShowModalMunicipalityDetails();
-  }, []);
-
   useEffect(() => {
     const svgElement = svgRef.current;
 
@@ -55,6 +47,7 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
           //   Evento de clique em cada municipio
           path.addEventListener('click', () => {
 
+            // Exibe os detalhes apenas dos municipios adquiridos
             const municipalityFound = acquiredMunicipalities.find((municipality) => municipality.name === municipalityName)
 
             if (municipalityFound) {
@@ -65,28 +58,16 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
         }
       });
 
-      return () => {
-        paths.forEach((path) => {
-          path.removeEventListener('click', () => handlePathClick(""));
-        });
-      };
     }
-  }, [acquiredMunicipalities, handlePathClick]); // handlePathClick foi adicionado como dependência
+  }, [acquiredMunicipalities]);
 
   return (
-
+    <>
     <div className='map bg-primary-map px-8 pb-8 rounded-xl'>
       <div className=' flex items-center justify-center gap-2 rounded-b-xl mx-auto w-56 text-gray-500 mb-10 bg-white p-2'>
         <img src={bandeiraPernambuco} alt="Bandeira de pernambuco" className='w-6' />
         <p className='font-semibold'>Pernambuco</p>
       </div>
-
-      {modalMunicipalityDetails && (
-        <ModalMunicipalityDetails
-          handleShowModalMunicipalityDetails={handleShowModalMunicipalityDetails}
-          municipalitySelected={municipalitySelected}
-        />
-      )}
 
       <svg ref={svgRef} width="100%" viewBox="0 0 917.57593 320.59138">
         <g transform="translate(-27.850324,-33.519923)">
@@ -1586,5 +1567,13 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
       </div>
 
     </div>
+
+    {modalMunicipalityDetails && (
+      <ModalMunicipalityDetails
+        handleShowModalMunicipalityDetails={handleShowModalMunicipalityDetails}
+        municipalitySelected={municipalitySelected}
+      />
+    )}
+    </>
   )
 }

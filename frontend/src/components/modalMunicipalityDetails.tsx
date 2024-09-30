@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { axiosInstace } from "../lib/axios";
+import { Pencil } from "lucide-react";
 
 interface Municipality {
   id: string;
@@ -25,9 +26,8 @@ export function ModalMunicipalityDetails({
       const fetchMunicipalityDetails = async () => {
         setLoading(true);
         try {
-          // Faz a requisição GET para obter os detalhes do município
           const response = await axiosInstace.get(`/api/municipality/${municipalitySelected.id}`);
-          setMunicipalityDetails(response.data); // Armazena os detalhes do município no estado
+          setMunicipalityDetails(response.data);
         } catch (error) {
           console.error("Error fetching municipality details:", error);
         } finally {
@@ -40,7 +40,7 @@ export function ModalMunicipalityDetails({
   }, [municipalitySelected]);
 
   if (!municipalitySelected) {
-    return null; // Se não houver município selecionado, não renderiza nada
+    return null;
   }
 
   return (
@@ -50,8 +50,13 @@ export function ModalMunicipalityDetails({
           <p>Carregando...</p> // Exibe um indicador de carregamento enquanto busca os dados
         ) : (
           <>
-            <h2 className="text-xl font-bold mb-4">{municipalityDetails?.name}</h2>
-            <p className="mb-2">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold text-gray-700">{municipalityDetails?.name}</h2>
+            <button className="p-2 rounded hover:bg-gray-400 cursor-pointer text-gray-700 hover:text-white">
+              <Pencil className="size-5" />
+            </button>
+          </div>
+            <p className="mb-2 text-gray-600">
               Status: {municipalityDetails?.present ? "Presente" : "Ausente"}
             </p>
           </>
