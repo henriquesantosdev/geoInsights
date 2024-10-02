@@ -14,9 +14,20 @@ model State {
 }
 
 model Municipality {
-  id      String  @id @default(uuid())
-  stateId String
-  name    String
-  present Boolean @default(false)
-  state   State   @relation(fields: [stateId], references: [id])
+  id                  String               @id @default(uuid())
+  stateId             String
+  name                String
+  present             Boolean              @default(false)
+  municipalityDetails MunicipalityDetails?
+  state               State                @relation(fields: [stateId], references: [id])
+}
+
+model MunicipalityDetails {
+  id                 String       @id @default(uuid())
+  ubsQuantity        Int
+  populationQuantity BigInt
+  secretaryName      String
+  secretaryContact   BigInt
+  municipalityId     String       @unique
+  municipality       Municipality @relation(fields: [municipalityId], references: [id])
 }

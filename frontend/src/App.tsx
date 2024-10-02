@@ -4,6 +4,8 @@ import { ArrowRightLeft, MapPinMinus, MapPinPlus } from "lucide-react"
 import { FooterGeoInsights } from "./components/footerGeoInsights"
 import { FormEvent, useEffect, useState } from "react";
 import { axiosInstace } from "./lib/axios";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+
 
 export default function App() {
 
@@ -44,6 +46,30 @@ export default function App() {
     municipality.name.toLowerCase().includes(notAcquiredSearchTerm.toLowerCase())
   );
 
+  const notifySuccess = () => toast.success('Município registrado!', {
+    position: "bottom-right",
+    autoClose: 1500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
+
+  const notifyDeleted = () => toast.error('Município removido!', {
+    position: "bottom-right",
+    autoClose: 1500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    transition: Bounce,
+  });
+
   // Register municipalities
   const registerMunicipalities = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -71,6 +97,8 @@ export default function App() {
       setNotAcquiredMunicipalities((prev) =>
         prev.filter((municipality) => !municipalitiesToRegister.includes(municipality.id))
       );
+
+      notifySuccess()
 
     } catch (error) {
       console.error("Error registering municipalities:", error);
@@ -101,9 +129,11 @@ export default function App() {
       );
 
       setNotAcquiredMunicipalities((prev) => [
-        ...removedMunicipalities, // Agora estamos adicionando os municípios com todos os detalhes
+        ...removedMunicipalities,
         ...prev
       ]);
+
+      notifyDeleted()
 
     } catch (error) {
       console.error("Error removing municipalities:", error);
@@ -112,6 +142,8 @@ export default function App() {
 
   return (
     <main>
+      <ToastContainer />
+
       <HeaderGeoInsights />
       <div className='border-b-2 border-b-secondary-color mb-8'></div>
 
