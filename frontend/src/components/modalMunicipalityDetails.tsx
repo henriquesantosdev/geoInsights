@@ -2,29 +2,11 @@ import { FormEvent, useEffect, useState } from "react";
 import { axiosInstace } from "../lib/axios";
 import { Plus, X } from "lucide-react";
 import 'react-toastify/dist/ReactToastify.css';
-
-interface Municipality {
-  id: string;
-  name: string;
-  present: boolean;
-  stateId: string;
-  populationQuantity: string;
-  secretaryContact: string;
-  secretaryName: string;
-  ubsQuantity: string;
-}
-
-// interface MunicipalityDetails {
-//   id: string
-//   populationQuantity: string;
-//   secretaryContact: string;
-//   secretaryName: string;
-//   ubsQuantity: string;
-// }
+import { MunicipalityDetailsInterface } from "../interfaces/municipalityDetails";
 
 interface MunicipalityDetailsProps {
   handleShowModalMunicipalityDetails: () => void;
-  municipalitySelected: Municipality | null;
+  municipalitySelected: MunicipalityDetailsInterface | null;
 }
 
 export function ModalMunicipalityDetails({

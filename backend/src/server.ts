@@ -11,6 +11,7 @@ import { deleteMunicipality } from "./routes/municipalities/delete-municipality"
 import { getMunicipalityDetails } from "./routes/municipalities/get-municipatility-details"
 import { createOrUpdateMunicipalityDetails } from "./routes/municipalities/create-or-update-municipatility-details"
 import { deleteMunicipalityDetails } from "./routes/municipalities/delete-municipatility-details"
+import { createOrUpdateConcorrence } from "./routes/concorrence/create-or-update-concorrence"
 
 const app = fastify()
 
@@ -31,6 +32,7 @@ app.register(deleteMunicipality)
 app.register(getMunicipalityDetails)
 app.register(createOrUpdateMunicipalityDetails)
 app.register(deleteMunicipalityDetails)
+app.register(createOrUpdateConcorrence)
 
 app.listen({ port: 3333 }).then((address) => {
     console.log(`🚀 Server is running on: \x1b[32m${address}/api`)

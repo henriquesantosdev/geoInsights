@@ -5,12 +5,17 @@
 }
 
 .map path:hover {
-    fill: #0076D6;
+    fill: #40A6F6;
     cursor: pointer;
 }
 
+
 .map path.acquired {
     fill: #0076D6;
+}
+
+.map path.concorrenceAcquired {
+    fill: #d30000;
 }
 
 .map {

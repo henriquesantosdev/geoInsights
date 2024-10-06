@@ -5,16 +5,10 @@ import { FooterGeoInsights } from "./components/footerGeoInsights"
 import { FormEvent, useEffect, useState } from "react";
 import { axiosInstace } from "./lib/axios";
 import { Bounce, toast, ToastContainer } from "react-toastify";
+import { MunicipalityInterface } from "./interfaces/municipalityInterface";
 
 
 export default function App() {
-
-  interface MunicipalityInterface {
-    id: string;
-    name: string;
-    present: boolean;
-    stateId: string;
-  }
 
   // Acquired municipalities ---------------------------------------------------------
   const [acquiredMunicipalities, setAcquiredMunicipalities] = useState<MunicipalityInterface[]>([]);
@@ -70,6 +64,8 @@ export default function App() {
     transition: Bounce,
   });
 
+  const [buttonClicked, setButtonClicked] = useState(0)
+
   // Register municipalities
   const registerMunicipalities = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -79,11 +75,26 @@ export default function App() {
     const municipalitiesToRegister = data.getAll('municipalityToRegister') as string[];
 
     try {
-      await Promise.all(municipalitiesToRegister.map(async (municipalityId) => {
-        await axiosInstace.put(`/api/municipality/${municipalityId}`, {
-          present: true
-        });
-      }));
+
+      // Verifica qual botao foi clicado, de registrar municipio para a empresa ou para o concorrente
+      if (buttonClicked == 0) {
+
+        await Promise.all(municipalitiesToRegister.map(async (municipalityId) => {
+          await axiosInstace.put(`/api/municipality/${municipalityId}`, {
+            present: true
+          });
+        }));
+
+      } else {
+
+        await Promise.all(municipalitiesToRegister.map(async (municipalityId) => {
+          await axiosInstace.put(`/api/municipality/${municipalityId}`, {
+            present: true,
+            concorrencePresent: true
+          });
+        }));
+
+      }
 
       const newMunicipalities = await Promise.all(
         municipalitiesToRegister.map(async (municipalityId) => {
@@ -114,7 +125,10 @@ export default function App() {
 
     try {
       await Promise.all(municipalitiesToRemove.map((municipalityId) =>
-        axiosInstace.put(`/api/municipality/${municipalityId}`, { present: false })
+        axiosInstace.put(`/api/municipality/${municipalityId}`, {
+          present: false,
+          concorrencePresent: false
+        })
       ));
 
       const removedMunicipalities = await Promise.all(
@@ -178,10 +192,18 @@ export default function App() {
                 )}
               </select>
 
-              <button className="flex items-center gap-2 rounded-md justify-center bg-primary-color hover:bg-secondary-color text-white font-semibold h-14">
-                <MapPinPlus />
-                Registrar município
-              </button>
+              <div className="flex flex-nowrap gap-2">
+                <button onClick={() => setButtonClicked(0)} className="flex items-center gap-2 rounded-md w-full justify-center bg-primary-color hover:bg-secondary-color text-white font-semibold h-14">
+                  <MapPinPlus />
+                  Registrar município
+                </button>
+
+                <button onClick={() => setButtonClicked(1)} className="flex items-center gap-2 rounded-md w-full justify-center bg-red-600 hover:bg-red-700 text-white font-semibold h-14">
+                  <MapPinPlus />
+                  Registrar concorrente
+                </button>
+              </div>
+
             </form>
 
           </div>

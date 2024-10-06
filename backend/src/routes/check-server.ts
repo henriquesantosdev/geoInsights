@@ -5,9 +5,9 @@ import { z } from 'zod'
 export const checkServer = async (app: FastifyInstance) => {
     app.withTypeProvider<ZodTypeProvider>().get('/api', {
         schema: {}
-    }, async () => {
-        return {
+    }, async (response, reply) => {
+        return reply.status(200).send({
             "message": "I'm online!"
-        }
+        })
     })
 }

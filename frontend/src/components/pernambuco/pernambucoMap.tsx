@@ -2,21 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import './pernambucoMapStyle.css';
 import bandeiraPernambuco from '/Bandeira_pernambuco.png';
 import { ModalMunicipalityDetails } from '../modalMunicipalityDetails';
-
-interface Municipality {
-  id: string;
-  name: string;
-  present: boolean;
-  stateId: string;
-}
+import { MunicipalityInterface } from '../../interfaces/municipalityInterface';
 
 interface PernambucoMapProps {
-  acquiredMunicipalities: Municipality[];
+  acquiredMunicipalities: MunicipalityInterface[];
 }
 
 export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
   const [modalMunicipalityDetails, setShowModalMunicipalityDetails] = useState(false);
-  const [municipalitySelected, setMunicipalitySelected] = useState<Municipality | null>(null);
+  const [municipalitySelected, setMunicipalitySelected] = useState<MunicipalityInterface | null>(null);
 
   const handleShowModalMunicipalityDetails = () => {
     setShowModalMunicipalityDetails((prevState) => !prevState);
@@ -29,33 +23,38 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
     let paths: NodeListOf<SVGPathElement> | null = null;
 
     if (svgElement) {
+      // Pegando todos os municipios do svg
       paths = svgElement.querySelectorAll("path");
 
+      // Percorrendo cada municipio (path)
       paths.forEach((path) => {
+        // Pegando o titulo do municipio
         const titleElement = path.querySelector("title");
 
         if (titleElement) {
           const municipalityName = titleElement.textContent;
 
-          const isAcquired = acquiredMunicipalities.some(
+          const municipalityData = acquiredMunicipalities.find(
             (municipality) => municipality.name === municipalityName
           );
 
-          // Atualiza as classes dos municipios adquiridos
-          if (isAcquired) {
-            path.classList.add("acquired");
-          } else {
-            path.classList.remove("acquired");
+          // Remove classes anteriores para evitar conflitos ao atualizar
+          path.classList.remove("acquired", "concorrenceAcquired");
+
+          if (municipalityData) {
+            if (municipalityData.present && !municipalityData.concorrencePresent) {
+              // Se a empresa está presente, adiciona a classe 'acquired'
+              path.classList.add("acquired");
+            } else if (municipalityData.concorrencePresent) {
+              // Se a concorrência está presente, adiciona a classe 'concorrenceAcquired'
+              path.classList.add("concorrenceAcquired");
+            }
           }
 
-          // Função de clique no município (define dentro do useEffect)
+          // Função de clique no município
           const handleClick = () => {
-            const municipalityFound = acquiredMunicipalities.find(
-              (municipality) => municipality.name === municipalityName
-            );
-
-            if (municipalityFound) {
-              setMunicipalitySelected(municipalityFound);
+            if (municipalityData) {
+              setMunicipalitySelected(municipalityData);
               handleShowModalMunicipalityDetails();
             }
           };
@@ -64,14 +63,14 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
           path.addEventListener("click", handleClick);
 
           // Remove o listener quando o componente desmontar ou quando acquiredMunicipalities mudar
-          return () => {
-            path.removeEventListener("click", handleClick);
-          };
+          // return () => {
+          //   path.removeEventListener("click", handleClick);
+          // };
         }
       });
     }
 
-    // Cleanup: Nenhum evento de clique será mantido entre renders
+    // Cleanup: remove todos os event listeners quando o componente desmontar
     return () => {
       if (paths) {
         paths.forEach((path) => {
@@ -1574,10 +1573,15 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
           </g>
         </svg>
 
-        <div className='flex items-center justify-center gap-8 mt-8'>
+        <div className='flex flex-wrap items-center justify-center gap-8 mt-8'>
           <div className='flex items-center gap-2'>
             <div className='rounded bg-primary-color w-4 h-4'></div>
             <span className='text-gray-600 font-semibold'>Municípios adquiridos</span>
+          </div>
+
+          <div className='flex items-center gap-2'>
+            <div className='rounded bg-[#d30000] w-4 h-4'></div>
+            <span className='text-gray-600 font-semibold'>Municípios ocupados por concorrentes</span>
           </div>
 
           <div className='flex items-center gap-2'>

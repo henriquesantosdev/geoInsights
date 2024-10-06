@@ -18,7 +18,9 @@ model Municipality {
   stateId             String
   name                String
   present             Boolean              @default(false)
+  concorrencePresent  Boolean              @default(false)
   municipalityDetails MunicipalityDetails?
+  concorrence         Concorrence?
   state               State                @relation(fields: [stateId], references: [id])
 }
 
@@ -30,4 +32,15 @@ model MunicipalityDetails {
   secretaryContact   BigInt
   municipalityId     String       @unique
   municipality       Municipality @relation(fields: [municipalityId], references: [id])
+}
+
+model Concorrence {
+  id              String       @id @default(uuid())
+  name            String
+  contractStarted DateTime
+  contractEnd     DateTime
+  value           Int
+  service         String
+  municipalityId  String       @unique
+  municipality    Municipality @relation(fields: [municipalityId], references: [id])
 }

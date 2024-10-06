@@ -10,13 +10,14 @@ export const updateMunicipality = async (app: FastifyInstance) => {
                 municipalityId: z.string().uuid()
             }),
             body: z.object({
-                present: z.boolean()
+                present: z.boolean(),
+                concorrencePresent: z.boolean()
             })
         }
     }, async (request, reply) => {
 
         const { municipalityId } = request.params
-        const { present } = request.body
+        const { present, concorrencePresent } = request.body
 
         const municipalityFound = await prisma.municipality.findUnique({
             where: {
@@ -35,7 +36,8 @@ export const updateMunicipality = async (app: FastifyInstance) => {
                 id: municipalityId
             },
             data: {
-                present
+                present,
+                concorrencePresent
             }
         })
 
