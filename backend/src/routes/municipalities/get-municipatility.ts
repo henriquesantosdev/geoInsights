@@ -17,6 +17,10 @@ export const getMunicipality = async (app: FastifyInstance) => {
         const municipalityFound = await prisma.municipality.findUnique({
             where: {
                 id: municipalityId
+            },
+            include: {
+                concorrence: true,
+                municipalityDetails: true
             }
         })
 

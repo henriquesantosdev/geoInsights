@@ -4,15 +4,15 @@ import { z } from 'zod'
 import { prisma } from "../../lib/prisma";
 
 export const updateConcorrence = async (app: FastifyInstance) => {
-    app.withTypeProvider<ZodTypeProvider>().delete('/api/concorrence', {
+    app.withTypeProvider<ZodTypeProvider>().delete('/api/concorrence/:municipalityId', {
         schema: {
-            body: z.object({
+            params: z.object({
                 municipalityId: z.string().uuid(),
             })
         }
     }, async (request, reply) => {
 
-        const { municipalityId } = request.body
+        const { municipalityId } = request.params
 
         const concorrenceUpdated = await prisma.concorrence.delete({
             where: {

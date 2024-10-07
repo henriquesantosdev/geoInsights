@@ -9,8 +9,8 @@ export const createOrUpdateConcorrence = async (app: FastifyInstance) => {
             body: z.object({
                 municipalityId: z.string().uuid(),
                 name: z.string().min(4),
-                contractStarted: z.date(),
-                contractEnd: z.date(),
+                contractStarted: z.coerce.date(),
+                contractEnd: z.coerce.date(),
                 value: z.number().min(1),
                 service: z.string()
             })

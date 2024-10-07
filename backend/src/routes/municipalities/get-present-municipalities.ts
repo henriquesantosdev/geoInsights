@@ -22,6 +22,9 @@ export const getPresentMunicipalities = async (app: FastifyInstance) => {
                 municipalities: {
                     where: {
                         present: true,
+                    },
+                    include: {
+                        concorrence: true
                     }
                 }
             }

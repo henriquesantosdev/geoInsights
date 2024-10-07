@@ -124,6 +124,11 @@ export default function App() {
     const municipalitiesToRemove = data.getAll('municipalityToRemove') as string[];
 
     try {
+
+      await Promise.all(municipalitiesToRemove.map((municipalityId) =>
+        axiosInstace.delete(`/api/municipality/${municipalityId}`)
+      ));
+
       await Promise.all(municipalitiesToRemove.map((municipalityId) =>
         axiosInstace.put(`/api/municipality/${municipalityId}`, {
           present: false,
@@ -236,7 +241,7 @@ export default function App() {
                 )}
               </select>
 
-              <button className="flex items-center gap-2 rounded-md justify-center bg-primary-color hover:bg-secondary-color text-white font-semibold h-14">
+              <button className="flex items-center gap-2 rounded-md justify-center bg-red-600 hover:bg-red-700 text-white font-semibold h-14">
                 <MapPinMinus />
                 Remover município
               </button>

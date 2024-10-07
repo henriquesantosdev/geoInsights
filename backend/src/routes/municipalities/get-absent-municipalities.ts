@@ -22,6 +22,9 @@ export const getAbsentMunicipalities = async (app: FastifyInstance) => {
                 municipalities: {
                     where: {
                         present: false
+                    },
+                    include: {
+                        concorrence: true
                     }
                 }
             }

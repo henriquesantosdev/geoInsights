@@ -63,9 +63,9 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
           path.addEventListener("click", handleClick);
 
           // Remove o listener quando o componente desmontar ou quando acquiredMunicipalities mudar
-          // return () => {
-          //   path.removeEventListener("click", handleClick);
-          // };
+          return () => {
+            path.removeEventListener("click", handleClick);
+          };
         }
       });
     }
