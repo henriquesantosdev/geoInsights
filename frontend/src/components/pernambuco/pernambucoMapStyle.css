@@ -1,3 +1,16 @@
+@keyframes pulse {
+    0% {
+        fill: #FEFEE9;
+    }
+    50% {
+        fill: #77c4ff;
+        stroke: #FEFEE9;
+    }
+    100% {
+        fill: #FEFEE9;
+    }
+}
+
 .map path {
     fill: #FEFEE9;
     stroke: #ffc768;
@@ -9,13 +22,23 @@
     cursor: pointer;
 }
 
-
 .map path.acquired {
     fill: #0076D6;
 }
 
 .map path.concorrenceAcquired {
     fill: #d30000;
+}
+
+/* Cor de destaque para os municípios encontrados */
+
+path.path-base {
+    fill: #FEFEE9;
+    transition: fill 0.3s;
+}
+
+path.highlighted {
+    animation: pulse 1.5s infinite;;
 }
 
 .map {

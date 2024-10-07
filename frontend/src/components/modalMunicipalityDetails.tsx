@@ -2,14 +2,14 @@ import { FormEvent, useEffect, useState } from "react";
 import { axiosInstace } from "../lib/axios";
 import { ChevronDown, Pencil, PencilOff, Plus, Save, X } from "lucide-react";
 import 'react-toastify/dist/ReactToastify.css';
-import { MunicipalityDetailsInterface } from "../interfaces/municipalityDetails";
 import { formatPhoneNumber } from "../utils/formatPhoneNumber";
 import { formatNumberValue } from "../utils/formatNumberValue";
 import { formatDate } from "../utils/formatDate";
+import { MunicipalityInterface } from "../interfaces/municipalityInterface";
 
 interface MunicipalityDetailsProps {
   handleShowModalMunicipalityDetails: () => void;
-  municipalitySelected: MunicipalityDetailsInterface | null;
+  municipalitySelected: MunicipalityInterface | null;
 }
 
 export function ModalMunicipalityDetails({
@@ -195,14 +195,14 @@ export function ModalMunicipalityDetails({
 
                     <ul className="space-y-2 text-gray-600">
                       <li>
-                        <strong>População:</strong> { formatNumberValue(municipalityDetails?.populationQuantity)}
+                        <strong>População:</strong> {formatNumberValue(municipalityDetails?.populationQuantity)}
                       </li>
                       <li>
                         <strong>Nome do Secretário:</strong> {municipalityDetails?.secretaryName}
                       </li>
                       <li>
                         <strong>Contato do Secretário:</strong> {formatPhoneNumber(municipalityDetails?.secretaryContact)}
-                      </li> 
+                      </li>
                       <li>
                         <strong>Quantidade de UBS:</strong> {formatNumberValue(municipalityDetails?.ubsQuantity)}
                       </li>
@@ -447,8 +447,8 @@ export function ModalMunicipalityDetails({
                       />
 
                       <button className="flex items-center gap-2 rounded-md justify-center bg-primary-color hover:bg-secondary-color text-white font-semibold h-14 w-full">
-                        <Plus />
-                        Registrar informações do concorrente
+                        <Save />
+                        Salvar alterações
                       </button>
                     </form>
                   )}

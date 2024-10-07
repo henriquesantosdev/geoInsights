@@ -80,6 +80,35 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
     };
   }, [acquiredMunicipalities]);
 
+  // Campo de pesquisa de municipios
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = e.target.value.toLowerCase();
+    setSearchTerm(searchValue);
+
+    // Realiza a busca local nos <title> de cada <path>
+    if (svgRef.current) {
+      const paths = Array.from(svgRef.current.querySelectorAll('path'));
+
+      // Limpa todos os destaques antes de aplicar novos
+      paths.forEach((path) => {
+        path.classList.remove('highlighted'); // Remove o destaque de todos os municípios
+      });
+
+      // Aplica destaque se o valor de busca não estiver vazio
+      if (searchValue) {
+        paths.forEach((path) => {
+          const titleElement = path.querySelector('title');
+
+          // Verifica se o texto do <title> corresponde ao termo de busca
+          if (titleElement && titleElement.textContent?.toLowerCase().includes(searchValue)) {
+            path.classList.add('highlighted'); // Destaca o município
+          }
+        });
+      }
+    }
+  };
+
   return (
     <>
       <div className='map bg-primary-map px-8 pb-8 rounded-xl'>
@@ -1573,20 +1602,33 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
           </g>
         </svg>
 
-        <div className='flex flex-wrap items-center justify-center gap-8 mt-8'>
-          <div className='flex items-center gap-2'>
-            <div className='rounded bg-primary-color w-4 h-4'></div>
-            <span className='text-gray-600 font-semibold'>Municípios adquiridos</span>
+
+        <div className='flex items-end justify-between'>
+          <div className='flex flex-col items-start justify-center gap-2 mt-8'>
+            <div className='flex items-center gap-2'>
+              <div className='rounded bg-primary-color w-4 h-4'></div>
+              <span className='text-gray-600 font-semibold'>Municípios adquiridos</span>
+            </div>
+
+            <div className='flex items-center gap-2'>
+              <div className='rounded bg-[#d30000] w-4 h-4'></div>
+              <span className='text-gray-600 font-semibold'>Municípios ocupados por concorrentes</span>
+            </div>
+
+            <div className='flex items-center gap-2'>
+              <div className='rounded bg-secondary-map w-4 h-4' ></div>
+              <span className='text-gray-600 font-semibold'>Municípios não adquiridos</span>
+            </div>
           </div>
 
-          <div className='flex items-center gap-2'>
-            <div className='rounded bg-[#d30000] w-4 h-4'></div>
-            <span className='text-gray-600 font-semibold'>Municípios ocupados por concorrentes</span>
-          </div>
-
-          <div className='flex items-center gap-2'>
-            <div className='rounded bg-secondary-map w-4 h-4' ></div>
-            <span className='text-gray-600 font-semibold'>Municípios não adquiridos</span>
+          <div className="search-bar w-2/6">
+            <input
+              type="text"
+              placeholder="Pesquisar município"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="border rounded p-4 w-full focus:outline-none focus:ring focus:ring-primary-color"
+            />
           </div>
         </div>
 
