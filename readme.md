@@ -57,7 +57,7 @@ Antes de rodar o projeto, é necessário ter instalado em sua máquina:
    npx prisma migrate dev
    ```
 
-6. Para popular o banco de dados com dados iniciais, execute o seed:
+6. Para popular o banco de dados com os municípios iniciais, execute o seed:
    ```bash
    npm run seed
    ```
