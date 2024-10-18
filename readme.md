@@ -38,7 +38,7 @@ Antes de rodar o projeto, é necessário ter instalado em sua máquina:
 
 2. Entre na pasta do back-end:
    ```bash
-   cd geoInsightsgeoinsights/backend
+   cd geoinsights/backend
    ```
 
 3. Instale as dependências:
