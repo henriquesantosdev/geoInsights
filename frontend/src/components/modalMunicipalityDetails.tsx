@@ -377,7 +377,7 @@ export function ModalMunicipalityDetails({
                         <strong>Serviços associados:</strong> {municipalitySelected?.concorrence.service}
                       </li>
                       <li>
-                        <strong>Valor do contrato:</strong> {formatNumberValue(municipalitySelected?.concorrence.value)}
+                        <strong>Valor do contrato:</strong> R$ {formatNumberValue(municipalitySelected?.concorrence.value)}
                       </li>
                       <li>
                         <strong>Data de início do contrato:</strong> {formatDate(municipalitySelected?.concorrence.contractStarted)}

@@ -1627,7 +1627,7 @@ export function PernambucoMap({ acquiredMunicipalities }: PernambucoMapProps) {
               placeholder="Pesquisar município"
               value={searchTerm}
               onChange={handleSearchChange}
-              className="border rounded p-4 w-full focus:outline-none focus:ring focus:ring-primary-color"
+              className="border border-[#ffc768] text-terciary-color placeholder:text-terciary-color bg-[#FEFEE9] rounded p-4 w-full focus:outline-none focus:ring focus:ring-terciary-color"
             />
           </div>
         </div>

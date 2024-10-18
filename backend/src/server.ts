@@ -3,7 +3,6 @@ import cors from "@fastify/cors"
 import { getPresentMunicipalities } from "./routes/municipalities/get-present-municipalities"
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod"
 import { checkServer } from "./routes/check-server"
-import { basePernambuco } from "./routes/bases/base-pernambuco"
 import { getAbsentMunicipalities } from "./routes/municipalities/get-absent-municipalities"
 import { getMunicipality } from "./routes/municipalities/get-municipatility"
 import { updateMunicipality } from "./routes/municipalities/update-municipality"
@@ -23,7 +22,6 @@ app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
 
 app.register(checkServer)
-app.register(basePernambuco)
 app.register(getPresentMunicipalities)
 app.register(getAbsentMunicipalities)
 app.register(getMunicipality)

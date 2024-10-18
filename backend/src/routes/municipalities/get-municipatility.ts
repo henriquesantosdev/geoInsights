@@ -17,20 +17,10 @@ export const getMunicipality = async (app: FastifyInstance) => {
         const municipalityFound = await prisma.municipality.findUnique({
             where: {
                 id: municipalityId
-            },
-            include: {
-                concorrence: true,
-                municipalityDetails: true
             }
         })
 
-        if (!municipalityFound) {
-            return {
-                message: 'Municipality not found!',
-            }
-        }
-
-        return municipalityFound
+        return reply.status(200).send(municipalityFound)
     }
     )
 }

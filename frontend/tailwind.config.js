@@ -13,6 +13,7 @@ export default {
         'bgmarques': '#E7E7E7',
         'primary-color': '#0076D6',
         'secondary-color': '#006cbf',
+        'terciary-color': '#e89e27',
         'primary-map': '#F6E1B9',
         'secondary-map': '#FEFEE9',
         'pattern-map': ''

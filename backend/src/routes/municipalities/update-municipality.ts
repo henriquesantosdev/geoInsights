@@ -22,16 +22,27 @@ export const updateMunicipality = async (app: FastifyInstance) => {
         const municipalityFound = await prisma.municipality.findUnique({
             where: {
                 id: municipalityId
+            },
+            include: {
+                concorrence: true
             }
         })
 
         if (!municipalityFound) {
             return {
-                "message": "Municipatilit not found!"
+                "message": "Municipality not found!"
             }
         }
 
-        const municipalityUpdated = await prisma.municipality.update({
+        if (municipalityFound.concorrence) {
+            await prisma.concorrence.delete({
+                where: {
+                    municipalityId
+                }
+            })
+        }
+
+        await prisma.municipality.update({
             where: {
                 id: municipalityId
             },
@@ -40,17 +51,5 @@ export const updateMunicipality = async (app: FastifyInstance) => {
                 concorrencePresent
             }
         })
-
-        if (!municipalityUpdated) {
-            return {
-                "message": "Municipatilit not upadated!"
-            }
-        }
-
-        return {
-            "message": "Municipatility updated!",
-            municipalityUpdated
-        }
-
     })
 }

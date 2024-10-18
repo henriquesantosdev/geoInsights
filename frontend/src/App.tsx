@@ -33,11 +33,11 @@ export default function App() {
 
   // Filter municipalities
   const filteredAcquiredMunicipalities = acquiredMunicipalities.filter((municipality) =>
-    municipality.name.toLowerCase().includes(acquiredSearchTerm.toLowerCase())
+    municipality.name?.toLowerCase().includes(acquiredSearchTerm.toLowerCase())
   );
 
   const filteredNotAcquiredMunicipalities = notAcquiredMunicipalities.filter((municipality) =>
-    municipality.name.toLowerCase().includes(notAcquiredSearchTerm.toLowerCase())
+    municipality.name?.toLowerCase().includes(notAcquiredSearchTerm.toLowerCase())
   );
 
   const notifySuccess = () => toast.success('Município registrado!', {
@@ -81,7 +81,8 @@ export default function App() {
 
         await Promise.all(municipalitiesToRegister.map(async (municipalityId) => {
           await axiosInstace.put(`/api/municipality/${municipalityId}`, {
-            present: true
+            present: true,
+            concorrencePresent: false
           });
         }));
 
@@ -99,7 +100,7 @@ export default function App() {
       const newMunicipalities = await Promise.all(
         municipalitiesToRegister.map(async (municipalityId) => {
           const response = await axiosInstace.get(`/api/municipality/${municipalityId}`);
-          return response.data;
+          return response.data
         })
       );
 
@@ -124,11 +125,6 @@ export default function App() {
     const municipalitiesToRemove = data.getAll('municipalityToRemove') as string[];
 
     try {
-
-      await Promise.all(municipalitiesToRemove.map((municipalityId) =>
-        axiosInstace.delete(`/api/municipality/${municipalityId}`)
-      ));
-
       await Promise.all(municipalitiesToRemove.map((municipalityId) =>
         axiosInstace.put(`/api/municipality/${municipalityId}`, {
           present: false,
@@ -136,13 +132,15 @@ export default function App() {
         })
       ));
 
+      // Buscar municípios atualizados após a exclusão
       const removedMunicipalities = await Promise.all(
         municipalitiesToRemove.map(async (municipalityId) => {
           const response = await axiosInstace.get(`/api/municipality/${municipalityId}`);
-          return response.data;
+          return response.data
         })
       );
 
+      // Atualizar o estado do frontend
       setAcquiredMunicipalities((prev) =>
         prev.filter(m => !municipalitiesToRemove.includes(m.id))
       );
@@ -152,7 +150,7 @@ export default function App() {
         ...prev
       ]);
 
-      notifyDeleted()
+      notifyDeleted();
 
     } catch (error) {
       console.error("Error removing municipalities:", error);
@@ -208,9 +206,7 @@ export default function App() {
                   Registrar concorrente
                 </button>
               </div>
-
             </form>
-
           </div>
 
           <div>

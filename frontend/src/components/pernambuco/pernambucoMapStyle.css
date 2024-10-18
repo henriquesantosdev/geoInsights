@@ -38,7 +38,7 @@ path.path-base {
 }
 
 path.highlighted {
-    animation: pulse 1.5s infinite;;
+    animation: pulse 1s infinite;;
 }
 
 .map {
